@@ -14,12 +14,25 @@
         <h1>Zeta Routing</h1>
 
         <form id="inputForm">
-            <label for="valueInput">Name: </label>
-            <input type="text" id="valueInput" name="valueInput" placeholder="Enter a name" />
+            <p>
+                <label for="inputName">Name: </label>
+                <input type="text" id="inputName" name="inputName" placeholder="Enter a name" />
+            </p>
+            <p>
+                <label for="inputAnimal">Spirit Animal: </label>
+                <input type="text" id="inputAnimal" name="inputAnimal" placeholder="Enter an animal" />
+            </p>
+            <p>
+                <label for="inputCity">City: </label>
+                <input type="text" id="inputCity" name="inputCity" placeholder="Enter a city" />
+            </p>
         </form>
+        <button id="postData" class="btn btn-info">Add Person</button>
 
-        <button id="getData" class="btn btn-info">Get Data</button>
-        <button id="postData" class="btn btn-info">Post Data</button>
+
+        <div id="peopleList">
+            <button id="getData" class="btn btn-info">List People</button>
+        </div>
     </div>
 </body>
 </html>

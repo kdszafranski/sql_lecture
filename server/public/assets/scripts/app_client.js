@@ -2,24 +2,24 @@
 
 // event listeners
 $(document).ready(function() {
-    $("#getData").on("click", clickGetData);
-    $("#postData").on("click", clickPostData);
+    $("#getData").on("click", getPeopleList);
+    $("#postData").on("click", addPerson);
 });
 
 // ajax requests
-function clickGetData() {
+function getPeopleList() {
     $.ajax(
         {
             type: "GET",
-            url: "/data",
+            url: "/people/",
             success: function (data) {
-                console.log(data);
+                refreshList(data);
             }
         }
     );
 }
 
-function clickPostData() {
+function addPerson() {
     var values = {};
     $.each($("#inputForm").serializeArray(), function(i, field) {
         values[field.name] = field.value;
@@ -30,14 +30,28 @@ function clickPostData() {
     $.ajax(
         {
             type: "POST",
-            url: "/data",
+            url: "/people/add",
             data: values,
             beforeSend: function() {
                 console.log("DATA: ", values);
             },
             success: function(data) {
-                console.log(data);
+                if(data) {
+                    // refresh our list
+                    getPeopleList();
+                } else {
+                    console.log("ERROR adding people on server", data);
+                }
             }
         }
     );
+}
+
+function refreshList(peopleArray) {
+    $("#peopleList p").remove();
+
+    for(var i = 0; i < peopleArray.length; i++) {
+        var person = peopleArray[i];
+        $("#peopleList").append('<p>' + person.name + '</p>');
+    }
 }

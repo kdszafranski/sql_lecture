@@ -7,14 +7,12 @@ var bodyParser = require('body-parser');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({expanded: true}));
 
-var data = require('./routes/data');
+var people = require('./routes/people');
 var index = require('./routes/index');
 
 // mount router middleware
-app.use("/data", data);
+app.use("/people", people);
 app.use("/", index);
-
-
 
 // set node to listen on a port
 app.set('port', process.env.PORT || 5000);

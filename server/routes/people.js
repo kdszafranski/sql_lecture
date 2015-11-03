@@ -5,11 +5,10 @@ var pg = require('pg');
 var connectionString = process.env.DATABASE_URL || 'postgres://localhost:5432/example_database';
 
 router.get("/", function(req, res) {
-    pg.connect(connectionString, function (err, client, done) {
-        var results = [];
+    var results = [];
 
-        // SQL Query > Select Data
-        var query = client.query("SELECT * FROM people ORDER BY name DESC");
+    pg.connect(connectionString, function (err, client, done) {
+        var query = client.query("SELECT * FROM people ORDER BY name ASC");
 
         // Stream results back one row at a time
         query.on('row', function (row) {
@@ -29,12 +28,27 @@ router.get("/", function(req, res) {
     });
 });
 
-//router.post("/add", function(req, res) {
-//
-//SQL Query > Insert Data
-//client.query("INSERT INTO items(text, complete) values($1, $2)", [data.text, data.complete]);
-//});
+router.post("/add", function(req, res) {
+    pg.connect(connectionString, function (err, client, done) {
+        // grab data from the http request
+        var data = {
+            name: req.body.inputName,
+            animal: req.body.inputAnimal,
+            city: req.body.inputCity
+        };
 
+        //SQL Query > Insert Data
+        client.query("INSERT INTO people(name, spirit_animal, city) values($1, $2, $3) RETURNING id", [data.name, data.animal, data.city],
+            function(err, result) {
+                if(err) {
+                    console.log("Error inserting data: ", err);
+                    res.send(false)
+                }
+
+                res.send(true);
+            });
+    });
+});
 
 module.exports = router;
 
