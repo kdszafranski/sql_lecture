@@ -1,7 +1,7 @@
 {
-  "name": "zeta_routing_post",
+  "name": "dblecture",
   "version": "1.0.0",
-  "description": "routing example app for Zeta cohort",
+  "description": "SQL example",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
