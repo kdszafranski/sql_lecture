@@ -11,8 +11,13 @@
 </head>
 <body>
     <div class="container">
-        <h1>Zeta Routing</h1>
-
+        <h3>People Manager</h3>
+        <form id="search">
+            <input type="text" id="peopleSearch" name="peopleSearch" placeholder="Find Person by name">
+            <button id="submitSearch" class="btn btn-info">Submit</button>
+        </form>
+        <hr />
+        <h3>Add a Person!</h3>
         <form id="inputForm">
             <p>
                 <label for="inputName">Name: </label>
@@ -30,9 +35,7 @@
         <button id="postData" class="btn btn-info">Add Person</button>
 
 
-        <div id="peopleList">
-            <button id="getData" class="btn btn-info">List People</button>
-        </div>
+        <div id="peopleContainer"></div>
     </div>
 </body>
 </html>

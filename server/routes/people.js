@@ -4,6 +4,55 @@ var pg = require('pg');
 
 var connectionString = process.env.DATABASE_URL || 'postgres://localhost:5432/example_database';
 
+router.post("/add", function(req, res) {
+    pg.connect(connectionString, function (err, client, done) {
+        // grab data from the http request
+        var data = {
+            name: req.body.inputName,
+            animal: req.body.inputAnimal,
+            city: req.body.inputCity
+        };
+
+        //SQL Query > Insert Data
+        client.query("INSERT INTO people(name, spirit_animal, city) values($1, $2, $3) RETURNING id", [data.name, data.animal, data.city],
+            function(err, result) {
+                if(err) {
+                    console.log("Error inserting data: ", err);
+                    res.send(false)
+                }
+
+                res.send(true);
+            });
+    });
+});
+
+router.post("/find", function(req, res) {
+    console.log(req);
+    var searchFor = req.query.peopleSearch;
+    var results = [];
+
+    pg.connect(connectionString, function (err, client, done) {
+        var query = client.query("SELECT * FROM people WHERE name LIKE \'%" + searchFor + "%\' ");
+        console.log("FIND Query: ", query.text);
+
+        // Stream results back one row at a time
+        query.on('row', function (row) {
+            results.push(row);
+        });
+
+        // After all data is returned, close connection and return results
+        query.on('end', function () {
+            client.end();
+            return res.json(results);
+        });
+
+        // Handle Errors
+        if (err) {
+            console.log(err);
+        }
+    });
+});
+
 router.get("/", function(req, res) {
     var results = [];
 
@@ -25,28 +74,6 @@ router.get("/", function(req, res) {
         if (err) {
             console.log(err);
         }
-    });
-});
-
-router.post("/add", function(req, res) {
-    pg.connect(connectionString, function (err, client, done) {
-        // grab data from the http request
-        var data = {
-            name: req.body.inputName,
-            animal: req.body.inputAnimal,
-            city: req.body.inputCity
-        };
-
-        //SQL Query > Insert Data
-        client.query("INSERT INTO people(name, spirit_animal, city) values($1, $2, $3) RETURNING id", [data.name, data.animal, data.city],
-            function(err, result) {
-                if(err) {
-                    console.log("Error inserting data: ", err);
-                    res.send(false)
-                }
-
-                res.send(true);
-            });
     });
 });
 
