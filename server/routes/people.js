@@ -8,13 +8,12 @@ router.post("/add", function(req, res) {
     pg.connect(connectionString, function (err, client, done) {
         // grab data from the http request
         var data = {
-            name: req.body.inputName,
-            animal: req.body.inputAnimal,
-            city: req.body.inputCity
+            name: req.body.peopleAdd,
+            location: req.body.locationAdd
         };
 
         //SQL Query > Insert Data
-        client.query("INSERT INTO people(name, spirit_animal, city) values($1, $2, $3) RETURNING id", [data.name, data.animal, data.city],
+        client.query("INSERT INTO people (name, location) VALUES ($1, $2) RETURNING id", [data.name, data.location],
             function(err, result) {
                 if(err) {
                     console.log("Error inserting data: ", err);
@@ -51,6 +50,10 @@ router.post("/find", function(req, res) {
             console.log(err);
         }
     });
+});
+
+router.delete("/remove", function() {
+
 });
 
 router.get("/", function(req, res) {

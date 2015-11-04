@@ -12,8 +12,9 @@ $(document).ready(function() {
 
         findPerson(values);
     });
-    $("#getData").on("click", getPeopleList);
-    $("#postData").on("click", addPerson)
+
+    $("#addSomeone").submit(addSomeone);
+    //$("#peopleContainer").on('click', '.delete', deletePerson);
 
     // populate list
     getPeopleList();
@@ -47,13 +48,13 @@ function getPeopleList() {
     );
 }
 
-function addPerson() {
+function addSomeone() {
+    event.preventDefault();
     var values = {};
-    $.each($("#inputForm").serializeArray(), function(i, field) {
+
+    $.each($("#addSomeone").serializeArray(), function(i, field) {
         values[field.name] = field.value;
     });
-
-    $("#inputForm").find("input[type=text]").val("");
 
     $.ajax(
         {
@@ -77,12 +78,12 @@ function addPerson() {
 
 function refreshList(data) {
     $("#peopleContainer").empty();
+    $("#addSomeone").find("input[type=text]").val("");
 
     for(var i = 0; i < data.length; i++){
         var el = "<div class='well col-md-3'>" +
             "<p>" + data[i].name + "</p>" +
-            "<p>" + data[i].spirit_animal + "</p>" +
-            "<p>" + data[i].city + "</p>" +
+            "<p>" + data[i].location + "</p>" +
             "<button class='delete btn btn-danger' data-id='" +
             data[i].id + "'>Delete</button>" +
             "</div>";

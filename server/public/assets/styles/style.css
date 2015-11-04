@@ -7,7 +7,7 @@ label {
     text-align: right;
 }
 
-#peopleList {
+#peopleContainer {
     margin: 20px;
-    border: 1px solid gray;
+    padding: 5px;
 }

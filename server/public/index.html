@@ -11,28 +11,20 @@
 </head>
 <body>
     <div class="container">
-        <h3>People Manager</h3>
+        <h3>Find Person</h3>
         <form id="search">
-            <input type="text" id="peopleSearch" name="peopleSearch" placeholder="Find Person by name">
+            <input type="text" id="peopleSearch" name="peopleSearch" placeholder="Find Person by Name">
             <button id="submitSearch" class="btn btn-info">Submit</button>
         </form>
+
         <hr />
+
         <h3>Add a Person!</h3>
-        <form id="inputForm">
-            <p>
-                <label for="inputName">Name: </label>
-                <input type="text" id="inputName" name="inputName" placeholder="Enter a name" />
-            </p>
-            <p>
-                <label for="inputAnimal">Spirit Animal: </label>
-                <input type="text" id="inputAnimal" name="inputAnimal" placeholder="Enter an animal" />
-            </p>
-            <p>
-                <label for="inputCity">City: </label>
-                <input type="text" id="inputCity" name="inputCity" placeholder="Enter a city" />
-            </p>
+        <form id="addSomeone">
+            <input type="text" id="peopleAdd" name="peopleAdd" placeholder="Enter Name">
+            <input type="text" id="locationAdd" name="locationAdd" placeholder="Enter Location">
+            <button id="submitAdd" class="btn btn-info">Submit Person</button>
         </form>
-        <button id="postData" class="btn btn-info">Add Person</button>
 
 
         <div id="peopleContainer"></div>
