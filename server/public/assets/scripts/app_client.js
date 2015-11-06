@@ -1,5 +1,5 @@
 /*  CLIENT SIDE     */
-
+// hi kris
 // event listeners
 $(document).ready(function() {
     $("#search").submit(function(event){
@@ -14,14 +14,13 @@ $(document).ready(function() {
     });
 
     $("#addSomeone").submit(addSomeone);
-    //$("#peopleContainer").on('click', '.delete', deletePerson);
+    $("#peopleContainer").on('click', '.delete', deletePerson);
 
     // populate list
     getPeopleList();
 });
 
 // ajax requests
-
 function findPerson(searchQuery) {
     $.ajax({
         type: "POST",
@@ -31,7 +30,7 @@ function findPerson(searchQuery) {
             console.log("Search for: ", searchQuery);
         },
         success: function(data) {
-            refreshList(data);
+            updateDOM(data);
         }
     })
 }
@@ -42,7 +41,7 @@ function getPeopleList() {
             type: "GET",
             url: "/people/",
             success: function (data) {
-                refreshList(data);
+                updateDOM(data);
             }
         }
     );
@@ -61,9 +60,6 @@ function addSomeone() {
             type: "POST",
             url: "/people/add",
             data: values,
-            beforeSend: function() {
-                console.log("DATA: ", values);
-            },
             success: function(data) {
                 if(data) {
                     // refresh our list
@@ -76,7 +72,22 @@ function addSomeone() {
     );
 }
 
-function refreshList(data) {
+function deletePerson(){
+    var deletedId = {"id" : $(this).data("id")};
+
+    console.log("Meaningful Log: ", deletedId);
+
+    $.ajax({
+        type: "DELETE",
+        url: "/people/remove",
+        data: deletedId,
+        success: function(data){
+            getPeopleList();
+        }
+    })
+}
+
+function updateDOM(data) {
     $("#peopleContainer").empty();
     $("#addSomeone").find("input[type=text]").val("");
 

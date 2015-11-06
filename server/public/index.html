@@ -11,7 +11,16 @@
 </head>
 <body>
     <div class="container">
-        <h3>Find Person</h3>
+        <h3>Add a Person</h3>
+        <form id="addSomeone">
+            <input type="text" id="peopleAdd" name="peopleAdd" placeholder="Enter Name">
+            <input type="text" id="locationAdd" name="locationAdd" placeholder="Enter Location">
+            <button id="submitAdd" class="btn btn-info">Submit Person</button>
+        </form>
+
+        <hr />
+
+        <h3>Find a Person</h3>
         <form id="search">
             <input type="text" id="peopleSearch" name="peopleSearch" placeholder="Find Person by Name">
             <button id="submitSearch" class="btn btn-info">Submit</button>
@@ -19,14 +28,7 @@
 
         <hr />
 
-        <h3>Add a Person!</h3>
-        <form id="addSomeone">
-            <input type="text" id="peopleAdd" name="peopleAdd" placeholder="Enter Name">
-            <input type="text" id="locationAdd" name="locationAdd" placeholder="Enter Location">
-            <button id="submitAdd" class="btn btn-info">Submit Person</button>
-        </form>
-
-
+        <h3>The People</h3>
         <div id="peopleContainer"></div>
     </div>
 </body>

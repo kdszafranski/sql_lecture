@@ -17,5 +17,5 @@ app.use("/", index);
 // set node to listen on a port
 app.set('port', process.env.PORT || 5000);
 app.listen(app.get("port"), function() {
-    console.log("Server is ready.");
+    console.log("Server is ready: " + app.get("port"));
 });
