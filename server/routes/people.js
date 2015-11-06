@@ -32,8 +32,9 @@ router.post("/add", function(req, res) {
 
 });
 
-router.post("/find", function(req, res) {
-    var searchFor = req.body.peopleSearch;
+router.get("/find", function(req, res) {
+    console.log(req.query.peopleSearch);
+    var searchFor = req.query.peopleSearch;
     var results = [];
 
     pg.connect(connectionString, function (err, client, done) {

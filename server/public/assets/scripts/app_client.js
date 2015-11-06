@@ -23,7 +23,7 @@ $(document).ready(function() {
 // ajax requests
 function findPerson(searchQuery) {
     $.ajax({
-        type: "POST",
+        type: "GET",
         url: "/people/find",
         data: searchQuery,
         beforeSend: function(data) {
